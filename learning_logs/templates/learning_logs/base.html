@@ -1,0 +1,17 @@
+<header>
+    <a href="{% url 'index' %}">Learning Log</a> - 
+    <a href="{% url 'topics' %}">Tópicos</a> | 
+    {% if user.is_authenticated %}
+        Olá, {{ user.username }} (<a href="{% url 'logout' %}">sair</a>)
+    {% else %}
+        <a href="{% url 'login' %}">Entrar</a> | 
+        <a href="{% url 'register' %}">registrar</a>
+    {% endif %}
+</header>
+
+{% block content %}
+{% endblock content %}
+
+<footer>
+    <p> Rodapé </p>
+</footer>
