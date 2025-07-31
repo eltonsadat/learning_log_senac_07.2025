@@ -25,5 +25,6 @@ urlpatterns = [
     path('success', views.success, name='success'),
     path('new_entry/<topic_id>', views.new_entry, name='new_entry'),
     path('edit_entry/<entry_id>', views.edit_entry, name='edit_entry'),
-    path('remove_entry/<entry_id>', views.remove_entry, name='remove_entry')
+    path('remove_entry/<entry_id>', views.remove_entry, name='remove_entry'),
+    path('erro_404', views.erro_404, name='erro_404'),
 ]

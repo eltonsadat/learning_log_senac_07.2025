@@ -26,7 +26,7 @@ def topic(request, topic_id):
 
     #Garante que a anotação seja visível apenas para o dono
     if topic.owner != request.user:
-        raise Http404
+        return render(request, '404.html', status=404)
 
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
@@ -113,3 +113,6 @@ def remove_entry(request, entry_id):
     topic_id = entry.topic.id
     entry.delete()
     return HttpResponseRedirect(reverse('topic', args=[topic_id]))
+
+def erro_404(request):
+    return render(request, '404.html', status=404)

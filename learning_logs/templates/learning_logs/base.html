@@ -1,17 +1,75 @@
-<header>
-    <a href="{% url 'index' %}">Learning Log</a> - 
-    <a href="{% url 'topics' %}">Tópicos</a> | 
-    {% if user.is_authenticated %}
-        Bem-vindo, {{ user.username }} (<a href="{% url 'logout' %}">sair</a>)
-    {% else %}
-        <a href="{% url 'login' %}">Entrar</a> | 
-        <a href="{% url 'register' %}">registrar</a>
-    {% endif %}
-</header>
+{% load bootstrap5 %}
+{% load static %}
 
-{% block content %}
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="pt_BR">
 
-<footer>
-    <p> Rodapé </p>
-</footer>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aplicação para estudos e anotações">
+    <meta name="keywords" content="estudo, estudos, anotações, anotações">
+    <meta name="author" content="Elton">
+
+    <title>Learning Log</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!--Página Inicial-->
+            <a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">&#128071;</span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <!--Tópicos-->
+                        <a class="nav-link active" aria-current="page" href="{% url 'topics' %}">Tópicos</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <!--Texto não clicável-->
+                    <li class="nav-item">
+
+                        <a class="nav-link disabled" aria-disabled="true">Bem-vindo, {{ user.username }}</a>
+
+                    </li>
+                    <!--Sair-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">sair</a>
+                    </li>
+                    {% else %}
+                    <!--Entrar-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Registrar</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div>
+            {% block header %}
+            {% endblock header %}
+        </div>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+</body>
+
+
+</html>
